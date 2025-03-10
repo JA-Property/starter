@@ -1,13 +1,3 @@
-<?php
-// Get content from layout
-ob_start();
-include __DIR__ . '/Layouts/Home.php';
-$content = ob_get_clean();
-
-// Include in global layout
-include __DIR__ . '/Layouts/GlobalLayout.php';
-
-?>
 <div class="welcome">
     <h2><?= htmlspecialchars($title) ?></h2>
     <p><?= htmlspecialchars($message) ?></p>
