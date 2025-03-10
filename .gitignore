@@ -1,0 +1,14 @@
+# Ignore environment files
+.env
+.env.local
+.env.*.local
+
+# Ignore vendor directory (not recommended if using Composer lock)
+vendor/
+
+# Ignore IDE and system files
+*.log
+*.cache
+*.DS_Store
+*.idea/
+*.vscode/
