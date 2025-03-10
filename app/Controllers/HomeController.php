@@ -28,22 +28,28 @@ class HomeController
      * @return string The rendered view
      */
     private function view(string $view, array $data = []): string
-    {
-        // Extract data to make variables available in the view
-        extract($data);
-        
-        // Start output buffering
+{
+    // Extract data to make variables available in the view
+    extract($data);
+    
+    // Start output buffering
+    ob_start();
+    
+    // Include the view file
+    $viewPath = __DIR__ . "/../Views/Layouts/{$view}.php";
+    if (file_exists($viewPath)) {
+        // Get content from the specific view
         ob_start();
+        include $viewPath;
+        $content = ob_get_clean();
         
-        // Include the view file
-        $viewPath = __DIR__ . "/../Views/{$view}.php";
-        if (file_exists($viewPath)) {
-            include $viewPath;
-        } else {
-            throw new \Exception("View '{$view}' not found");
-        }
-        
-        // Get the contents of the buffer and clean it
-        return ob_get_clean();
+        // Include the global layout
+        include __DIR__ . "/../Views/Layouts/GlobalLayout.php";
+    } else {
+        throw new \Exception("View '{$view}' not found");
     }
+    
+    // Get the contents of the buffer and clean it
+    return ob_get_clean();
+}
 }
